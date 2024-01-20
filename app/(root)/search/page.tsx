@@ -1,6 +1,7 @@
 import UserCard from "@/components/cards/UserCard"
 import PostThread from "@/components/forms/PostThread"
 import ProfileHeader from "@/components/shared/ProfileHeader"
+import Searchbar from "@/components/shared/Searchbar"
 
 import { profileTabs } from "@/constants"
 import { fetchUser, fetchUserPosts, fetchUsers } from "@/lib/actions/user.actions"
@@ -18,6 +19,7 @@ async function Page() {
   return (
     <>
         <div className="head-text mb-5">Search</div>
+        <Searchbar routeType='search' />
         
         <div className="mt-14 flex flex-col gap-9">
           {

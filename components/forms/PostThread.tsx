@@ -16,6 +16,7 @@ import { ThreadValidation } from '@/lib/validations/threads';
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import { useOrganization } from "@clerk/nextjs";
 import { createThread } from "@/lib/actions/thread.actions";
 // import { updateUser } from "@/lib/actions/user.actions";
 interface Props {
@@ -31,6 +32,7 @@ interface Props {
 }
 
 function PostThread({userId}:{userId: string}){
+  const {organization} = useOrganization()
     const router = useRouter()
     const pathname = usePathname()
   
@@ -39,7 +41,7 @@ function PostThread({userId}:{userId: string}){
         await createThread({
             text: values.thread,
             author:userId,
-            communityId:null,
+            communityId:organization?organization.id:null,
             path:pathname
 
         })
