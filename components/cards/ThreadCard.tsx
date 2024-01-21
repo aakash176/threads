@@ -1,6 +1,8 @@
 import { formatDateString } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
+import { MdOutlineDelete } from "react-icons/md";
+import { PopoverDemo } from "../ui/PopoverDemo";
 
 interface Props {
     id:string,
@@ -30,7 +32,7 @@ const ThreadCard = ({id,currentUserId,author,content,community,parentId, created
    
     return(
         <article className={`flex w-full flex-col rounded-xl  ${isComment? 'px-0 xs:px-7':'bg-dark-2 p-7'}`}>
-            <div className="flex items-start justify-between">
+            <div className="flex items-start justify-between max-sm:flex-col">
                 <div className="flex w-full flex-1 flex-row gap-4">
                     <div className="flex flex-col items-center">
                         <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
@@ -76,7 +78,17 @@ const ThreadCard = ({id,currentUserId,author,content,community,parentId, created
                         </div>
                     </div>
                 </div>
+                <div className="hidden lg:block sm:block md:hidden">
+                {
+                    !community && currentUserId === author.id && (
+                        <div>
+                            <PopoverDemo threadId={id} author={author} />
+                        </div>
+                            
+                    )
+                }
 
+                </div>
 
             </div>
             {!isComment && community && (
